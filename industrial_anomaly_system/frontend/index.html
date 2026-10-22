@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工业设备智能预警看板 | 云边协同</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+</head>
+<body>
+<div class="dashboard">
+    <header>
+        <div class="brand">
+            <h1>工业设备故障诊断与边缘预警系统</h1>
+            <p class="sub">Edge-Cloud Collaborative Predictive Maintenance</p>
+        </div>
+        <div class="header-right">
+            <div class="status-indicator"><span class="dot online"></span> 云边协同在线</div>
+            <div class="meta" id="meta-info">数据点 -- | 采样 1s</div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <aside class="sidebar">
+            <h2>实时监控 <span class="live-tag">LIVE</span></h2>
+
+            <div class="stat-card">
+                <span>边缘端 · 感知机判定</span>
+                <strong id="status-perceptron">正常</strong>
+            </div>
+            <div class="stat-card">
+                <span>云端 · 回归残差</span>
+                <strong id="status-residual">0.000</strong>
+            </div>
+            <div class="stat-card">
+                <span>自适应阈值</span>
+                <strong id="status-threshold">0.000</strong>
+            </div>
+            <div class="stat-card">
+                <span>连续性检测</span>
+                <strong id="status-continuity">正常</strong>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <span>RMS 均方根</span>
+                    <strong id="feat-rms">-</strong>
+                </div>
+                <div class="feature-item">
+                    <span>峭度 Kurtosis</span>
+                    <strong id="feat-kurt">-</strong>
+                </div>
+            </div>
+
+            <div id="trace-panel" class="trace-panel hidden">
+                <h3>⚠️ KNN 故障溯源</h3>
+                <p><strong>最相似样本:</strong> <span id="trace-id">-</span></p>
+                <p><strong>欧氏距离:</strong> <span id="trace-distance">-</span></p>
+                <p><strong>诊断建议:</strong> <span id="trace-suggestion">-</span></p>
+                <p class="trace-time"><strong>触发时刻:</strong> <span id="trace-time">-</span></p>
+            </div>
+
+            <div class="hint">
+                <p>点击任意曲线点位，联动查看该时刻的检测结果与溯源卡片。</p>
+            </div>
+        </aside>
+
+        <main class="charts-area">
+            <section class="chart-box">
+                <div class="chart-head">
+                    <h3>设备振动 / 温度趋势与异常标记</h3>
+                    <div class="legend-note">
+                        <span class="chip chip-vib">振动 mm/s</span>
+                        <span class="chip chip-temp">温度 ℃</span>
+                        <span class="chip chip-alarm">告警点</span>
+                    </div>
+                </div>
+                <div class="chart-canvas" id="realtime-chart"></div>
+            </section>
+
+            <section class="chart-box">
+                <div class="chart-head">
+                    <h3>物理残差 vs 自适应阈值</h3>
+                    <div class="legend-note">
+                        <span class="chip chip-res">残差 |y-ŷ|</span>
+                        <span class="chip chip-thr">动态阈值 3σ</span>
+                    </div>
+                </div>
+                <div class="chart-canvas" id="residual-chart"></div>
+            </section>
+        </main>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
