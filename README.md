@@ -57,7 +57,7 @@ http://localhost:8000/frontend/index.html
    └─ 导出 frontend/data.json → ECharts 看板点击联动溯源卡片
 ```
 
-## 关键设计点（面试可讲）
+## 关键设计点
 
 | 设计 | 解决什么问题 |
 | --- | --- |
